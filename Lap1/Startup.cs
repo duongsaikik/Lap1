@@ -34,6 +34,8 @@ namespace Lap1
             services.AddControllersWithViews();
             services.AddMvc();
             services.AddOptions();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
             services.Configure<ApplicationSettings>(Configuration.GetSection("Appsettings"));
         }
 
@@ -56,7 +58,7 @@ namespace Lap1
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
