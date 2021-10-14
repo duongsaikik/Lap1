@@ -124,3 +124,8 @@ D:\Web\Lap1\Lap1\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 D:\Web\Lap1\Lap1\bin\Debug\net5.0\System.IO.Pipelines.dll
 D:\Web\Lap1\Lap1\bin\Debug\net5.0\ASC.Utilities.dll
 D:\Web\Lap1\Lap1\bin\Debug\net5.0\ASC.Utilities.pdb
+D:\Web\Lap1\Lap1\bin\Debug\net5.0\Azure.Core.dll
+D:\Web\Lap1\Lap1\bin\Debug\net5.0\Azure.Data.Tables.dll
+D:\Web\Lap1\Lap1\bin\Debug\net5.0\ElCamino.AspNetCore.Identity.AzureTable.dll
+D:\Web\Lap1\Lap1\bin\Debug\net5.0\ElCamino.AspNetCore.Identity.AzureTable.Model.dll
+D:\Web\Lap1\Lap1\bin\Debug\net5.0\System.Memory.Data.dll

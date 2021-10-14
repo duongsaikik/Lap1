@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace ASC.Tests.TestUtilities
         public string Id => throw new NotImplementedException();
 
         public IEnumerable<string> Keys => throw new NotImplementedException();
-        //public Dictionary<string, byte[]> sessionFactory = new Dictionary<string, byte[]>();
+    
+        private Dictionary<string, byte[]> sessionFactory = new Dictionary<string, byte[]>();
         public void Clear()
         {
             throw new NotImplementedException();
@@ -38,12 +40,24 @@ namespace ASC.Tests.TestUtilities
 
         public void Set(string key, byte[] value)
         {
-            throw new NotImplementedException();
+            if (!sessionFactory.ContainsKey(key))
+                sessionFactory.Add(key, value);
+            else
+                sessionFactory[key] = value;
         }
 
         public bool TryGetValue(string key, out byte[] value)
         {
-            throw new NotImplementedException();
+            if(sessionFactory.ContainsKey(key) && sessionFactory[key] != null)
+            {
+                value = sessionFactory[key];
+                return true;
+            }
+            else
+            {
+                value = null;
+                return false;
+            }
         }
     }
 }

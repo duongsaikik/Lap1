@@ -190,3 +190,11 @@ D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\System.IO.Pipelines.dll
 D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\ASC.Utilities.dll
 D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\ASC.Utilities.pdb
+D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\ServiceStack.dll
+D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\ServiceStack.Client.dll
+D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\ServiceStack.Common.dll
+D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\ServiceStack.Interfaces.dll
+D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\ServiceStack.Text.dll
+D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\System.Private.ServiceModel.dll
+D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\System.ServiceModel.Primitives.dll
+D:\Web\Lap1\ASC.Tests\bin\Debug\net5.0\System.ServiceModel.dll

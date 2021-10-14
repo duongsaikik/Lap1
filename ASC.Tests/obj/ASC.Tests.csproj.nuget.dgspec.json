@@ -63,6 +63,10 @@
               "target": "Package",
               "version": "[4.16.1, )"
             },
+            "ServiceStack": {
+              "target": "Package",
+              "version": "[5.12.0, )"
+            },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -211,6 +215,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "ElCamino.AspNetCore.Identity.AzureTable": {
+              "target": "Package",
+              "version": "[5.1.0, )"
+            },
             "Microsoft.AspNetCore.Session": {
               "target": "Package",
               "version": "[2.2.0, )"

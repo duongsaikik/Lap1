@@ -1,14 +1,20 @@
+using ElCamino.AspNetCore.Identity.AzureTable.Model;
+using Lap1.Data;
+using Lap1.Models;
 using Lap1.Web.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityRole = Microsoft.AspNetCore.Identity.IdentityRole;
 using IHostingEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
 
 namespace Lap1
@@ -37,10 +43,25 @@ namespace Lap1
             services.AddDistributedMemoryCache();
             services.AddSession();
             services.Configure<ApplicationSettings>(Configuration.GetSection("Appsettings"));
+            services.AddIdentity<ApplicationUser, ElCamino.AspNetCore.Identity.AzureTable.Model.IdentityRole>((options) =>
+             {
+                 options.User.RequireUniqueEmail = true;
+             })
+            .AddAzureTableStores<ApplicationDbContext>(new Func<IdentityConfiguration>(() =>
+            {
+                IdentityConfiguration idconfig = new IdentityConfiguration();
+                idconfig.TablePrefix = Configuration.GetSection("IdentityAzureTable:IdentutyConfiguration:TablePrefix").Value;
+                idconfig.StorageConnectionString = Configuration.GetSection("IdentityAzureTable:IdentutyConfiguration:StorageConnectionString").Value;
+                idconfig.LocationMode = Configuration.GetSection("IdentityAzureTable:IdentutyConfiguration:LocationMode").Value;
+                return idconfig;
+            }))
+            .AddDefaultTokenProviders()
+            .CreateAzureTablesIfNotExists<ApplicationDbContext>();
+            services.AddSingleton<IIdentitySeed, IdentitySeed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env,IIdentitySeed storageSeed)
         {
             if (env.IsDevelopment())
             {
@@ -72,7 +93,9 @@ namespace Lap1
                     );
                
             });
-            
+            await storageSeed.Seed(app.ApplicationServices.GetService<UserManager<ApplicationUser>>(),
+                                   app.ApplicationServices.GetService<RoleManager<IdentityRole>>(),
+                                   app.ApplicationServices.GetService<IOptions<ApplicationSettings>>());
         }
     }
 }

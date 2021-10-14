@@ -24,6 +24,7 @@ namespace ASC.Tests.Controller
             optionsMock = new Mock<IOptions<ApplicationSettings>>();
 
             mockHttpContext = new Mock<HttpContext>();
+
             mockHttpContext.Setup(p => p.Session).Returns(new FakeSession());
 
             optionsMock.Setup(ap => ap.Value).Returns(new ApplicationSettings

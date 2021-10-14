@@ -116,6 +116,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "ElCamino.AspNetCore.Identity.AzureTable": {
+              "target": "Package",
+              "version": "[5.1.0, )"
+            },
             "Microsoft.AspNetCore.Session": {
               "target": "Package",
               "version": "[2.2.0, )"
