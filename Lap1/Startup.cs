@@ -4,6 +4,7 @@ using Lap1.Models;
 using Lap1.Web.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityRole = Microsoft.AspNetCore.Identity.IdentityRole;
+using IdentityRole = ElCamino.AspNetCore.Identity.AzureTable.Model.IdentityRole;
 using IHostingEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
 
 namespace Lap1
@@ -43,7 +44,7 @@ namespace Lap1
             services.AddDistributedMemoryCache();
             services.AddSession();
             services.Configure<ApplicationSettings>(Configuration.GetSection("Appsettings"));
-            services.AddIdentity<ApplicationUser, ElCamino.AspNetCore.Identity.AzureTable.Model.IdentityRole>((options) =>
+            services.AddIdentity<ApplicationUser, ApplicationRole>((options) =>
              {
                  options.User.RequireUniqueEmail = true;
              })
@@ -58,6 +59,7 @@ namespace Lap1
             .AddDefaultTokenProviders()
             .CreateAzureTablesIfNotExists<ApplicationDbContext>();
             services.AddSingleton<IIdentitySeed, IdentitySeed>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,23 +81,23 @@ namespace Lap1
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthorization();
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                    name: "default",
                    pattern: "{controller=Home}/{action=Index}/{id?}");
-               
-                endpoints.MapAreaControllerRoute(
-                     name: "areaRoute",
-                    areaName: "Admin",
-                    pattern: "Admin/{controller=Admin}/{action=Index}"
-                    );
-               
+                endpoints.MapRazorPages();
+                             
             });
-            await storageSeed.Seed(app.ApplicationServices.GetService<UserManager<ApplicationUser>>(),
-                                   app.ApplicationServices.GetService<RoleManager<IdentityRole>>(),
-                                   app.ApplicationServices.GetService<IOptions<ApplicationSettings>>());
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                await storageSeed.Seed(scope.ServiceProvider.GetService<UserManager<ApplicationUser>>(),
+                                        scope.ServiceProvider.GetService<RoleManager<ApplicationRole>>(),
+                                         scope.ServiceProvider.GetService<IOptions<ApplicationSettings>>());
+            }
+               
         }
     }
 }

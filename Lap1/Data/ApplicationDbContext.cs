@@ -9,7 +9,7 @@ namespace Lap1.Data
 {
     public class ApplicationDbContext : IdentityCloudContext
     {
-     
+       
         public ApplicationDbContext(IdentityConfiguration config) : base(config)
         {
 
