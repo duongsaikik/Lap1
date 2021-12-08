@@ -1,0 +1,73 @@
+﻿@model Webb.Areas.ServiceRequests.Models.NewServiceRequestViewModel
+@using System.Globalization;
+@{
+    ViewData["Title"] = "ServiceRequest";
+    Layout = "~/Views/Shared/_SecureLayout.cshtml";
+}
+<div class="row"></div>
+<div class="new_col">
+    @* Details Section *@
+    <div class="row z-depth-3">
+        <div class="col s12 padding-0px">
+            <div class="section white-text padding-left-10px blue-grey lighten-1">
+                <h5>New Service Request</h5>
+            </div>
+            <div class="divider"></div>
+            <form asp-controller="ServiceRequest" asp-action="ServiceRequest" method="post"
+                  class="col s12">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select asp-for="VehicleName" asp-items="@(new SelectList(ViewBag.VehicleNames,"RowKey","Name"))" class="" required="required">
+                             <option value="">
+                                    Please select one
+                             </option>
+                        </select>
+                        <label asp-for="VehicleName"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <select asp-for="VehicleType" asp-items="@(new SelectList(ViewBag.VehicleTypes,"RowKey","Name"))" class="validate" required="required">
+                            <option value="">Please select one</option>
+                        </select>
+                        <label asp-for="VehicleType"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input asp-for="RequestedDate" type="text" class="datepicker" />
+                        <label asp-for="RequestedDate"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <textarea asp-for="RequestedServices" class="materialize-textarea validate"></textarea>
+                        <label asp-for="RequestedServices"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 right-align">
+                        <button class="btn waves-effect waves-light btnSubmit" type="submit"
+                                name="action">
+                            Create
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="row col s12 right-align" asp-validation-summary="All"></div>
+                </div>
+            </form>
+        </div>
+        <div class="row"></div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+         $(document).ready(function () {
+             $('.datepicker').datepicker(
+                 {
+                     format: "dd mmm, yyyy"
+                 }
+           );
+         $('select').formSelect();
+         $("select[required]").css({ display: "block", position: 'absolute', visibility: 'hidden' });
+         });
+    </script>
+}
+
+

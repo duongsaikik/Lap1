@@ -1,0 +1,14 @@
+D:\Lap1-master\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.DataAccess.deps.json
+D:\Lap1-master\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.DataAccess.dll
+D:\Lap1-master\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.DataAccess.pdb
+D:\Lap1-master\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.Models.dll
+D:\Lap1-master\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.Utilities.dll
+D:\Lap1-master\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.Models.pdb
+D:\Lap1-master\ASC.DataAccess\bin\Debug\netcoreapp3.1\ASC.Utilities.pdb
+D:\Lap1-master\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.csprojAssemblyReference.cache
+D:\Lap1-master\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.AssemblyInfoInputs.cache
+D:\Lap1-master\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.AssemblyInfo.cs
+D:\Lap1-master\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.csproj.CoreCompileInputs.cache
+D:\Lap1-master\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.csproj.CopyComplete
+D:\Lap1-master\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.dll
+D:\Lap1-master\ASC.DataAccess\obj\Debug\netcoreapp3.1\ASC.DataAccess.pdb

@@ -17,16 +17,18 @@ namespace Webb.Areas.Identity.Pages.Account
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
-        public InitiateResetPasswordModel(UserManager<ApplicationUser> userManager)
+        public InitiateResetPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
-           
+            _emailSender = emailSender;
         }
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
 
             // Find User
             var userEmail = HttpContext.User.GetCurrentUserDetails().Email;
+            //var user = await _userManager.FindByEmailAsync(userEmail);
+           
             var user = await _userManager.FindByEmailAsync(userEmail);
             // Generate User code
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -41,8 +43,7 @@ namespace Webb.Areas.Identity.Pages.Account
                 protocol: Request.Scheme);
            
             // Send Email
-            await _emailSender.SendEmailAsync(userEmail, "Reset Password",
-            $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+            await _emailSender.SendEmailAsync(userEmail, "Reset Password",$"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
            
 
             return RedirectToPage("./ResetPasswordEmailConfirmation");

@@ -15,8 +15,9 @@ p {
   line-height: 2rem;
 }
 
+
 .sidenav-trigger {
-  color: #26a69a;
+    color: #26a69a;
 }
 
 .parallax-container {
@@ -87,8 +88,27 @@ footer.page-footer {
     border-bottom: 1px solid #00E676;
     box-shadow: 0 1px 0 0 #00E676;
 }
+.new_col {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+}
 
 .validation-summary-errors {
     color: #FF4081;
 }
 
+.margin-top-50px {
+    margin-top: 50px;
+}
+
+.margin-bottom-50px {
+    margin-bottom: 50px;
+}
+
+.img_corec{
+    width:48px;
+    height:48px;
+}
+.cursor-hand{
+    cursor:pointer;
+}

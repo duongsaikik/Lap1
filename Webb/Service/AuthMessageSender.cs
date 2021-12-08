@@ -1,5 +1,6 @@
 ﻿using Lap1.Web.Configuration;
 using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 using MimeKit;
@@ -27,7 +28,8 @@ namespace Webb.Service
             emailMessage.Body = new TextPart("plain") { Text = message };
             using (var client = new SmtpClient())
             {
-                await client.ConnectAsync(_settings.Value.SMTPServer, _settings.Value.SMTPPort, false);
+                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                await client.ConnectAsync(_settings.Value.SMTPServer, _settings.Value.SMTPPort, SecureSocketOptions.Auto);
                 await client.AuthenticateAsync(_settings.Value.SMTPAccount, _settings.Value.SMTPPassword);
                 await client.SendAsync(emailMessage);
                 await client.DisconnectAsync(true);

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Web\\Lap1\\ASC.Utilities\\ASC.Utilities.csproj": {}
+    "D:\\Lap1-master\\ASC.Utilities\\ASC.Utilities.csproj": {}
   },
   "projects": {
-    "D:\\Web\\Lap1\\ASC.Utilities\\ASC.Utilities.csproj": {
+    "D:\\Lap1-master\\ASC.Utilities\\ASC.Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Web\\Lap1\\ASC.Utilities\\ASC.Utilities.csproj",
+        "projectUniqueName": "D:\\Lap1-master\\ASC.Utilities\\ASC.Utilities.csproj",
         "projectName": "ASC.Utilities",
-        "projectPath": "D:\\Web\\Lap1\\ASC.Utilities\\ASC.Utilities.csproj",
+        "projectPath": "D:\\Lap1-master\\ASC.Utilities\\ASC.Utilities.csproj",
         "packagesPath": "C:\\Users\\ADMINS\\.nuget\\packages\\",
-        "outputPath": "D:\\Web\\Lap1\\ASC.Utilities\\obj\\",
+        "outputPath": "D:\\Lap1-master\\ASC.Utilities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -47,6 +47,10 @@
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
               "version": "[5.0.10, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

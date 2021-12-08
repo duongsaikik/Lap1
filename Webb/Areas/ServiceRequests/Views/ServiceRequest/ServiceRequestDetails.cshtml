@@ -1,0 +1,140 @@
+﻿@model Webb.Areas.ServiceRequests.Models.ServiceRequestDetailViewModel
+@using Microsoft.AspNetCore.Http
+@using ASC.Models.BaseTypes
+@inject IHttpContextAccessor UserHttpContext
+@{
+    Layout = "_SecureLayout";
+}
+@{
+    // Compute Service Engineer and Status Disable logic
+    string serviceEngineerDisabled = null;
+    if (!UserHttpContext.HttpContext.User.IsInRole(Roles.Admin.ToString()))
+    {
+        serviceEngineerDisabled = "disabled";
+    }
+    string statusDisabled = null;
+    if (!UserHttpContext.HttpContext.User.IsInRole(Roles.Admin.ToString()) &&
+    !UserHttpContext.HttpContext.User.IsInRole(Roles.Engineer.ToString()))
+    {
+        statusDisabled = "disabled";
+    }
+    // Customer can update the status only if the original status is Customer pending approval.
+    if (UserHttpContext.HttpContext.User.IsInRole(Roles.User.ToString()) &&
+    Model.ServiceRequest.Status == Status.PendingCustomerApproval.ToString())
+    {
+        statusDisabled = null;
+        ViewBag.Status = new List<string> { "Completed", "RequestForInformation" };
+    }
+}
+
+<div class="row"></div>
+<div class="row padding-top-20px">
+    @* Details Section *@
+    <div class="row z-depth-3">
+        <div class="col s12 padding-0px">
+            <div class="section white-text padding-left-10px blue-grey lighten-1">
+                <h5>Service Request Details</h5>
+            </div>
+            <div class="divider"></div>
+            <form asp-controller="ServiceRequest" asp-action="UpdateServiceRequestDetails"
+                  method="post" class="col s12">
+                <input type="hidden" asp-for="ServiceRequest.RowKey" />
+                <input type="hidden" asp-for="ServiceRequest.PartitionKey" />
+                <input type="hidden" asp-for="ServiceRequest.RequestedDate" />
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select asp-for="ServiceRequest.VehicleName"
+                                asp-items="@(new SelectList(ViewBag.VehicleNames,"RowKey","Name"))" class="" required="required" disabled>
+                    <option value=" ">
+                            Please select one</option>
+                        </select>
+                        <label asp-for="ServiceRequest.VehicleName"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <select asp-for="ServiceRequest.VehicleType" asp-items="@(new SelectList(ViewBag.VehicleTypes,"RowKey","Name"))"
+                                class="validate" required="required" disabled>
+                            <option value="">Please select one</option>
+                        </select>
+                        <label asp-for="ServiceRequest.VehicleType"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input asp-for="ServiceRequest.RequestedDate" type="text" disabled="disabled" class="datepicker" />
+                        <label asp-for="ServiceRequest.RequestedDate"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <textarea asp-for="ServiceRequest.RequestedServices"
+                                  class="materialize-textarea validate"></textarea>
+                        <label asp-for="ServiceRequest.RequestedServices"></label>
+                    </div>
+                </div>
+<div class="row">
+ <div class="input-field col s4">
+ <select asp-for="ServiceRequest.ServiceEngineer"
+ asp-items="@(new SelectList(ViewBag.ServiceEngineers,"Email", "Email"))"
+                                class="" required="required" disabled=@serviceEngineerDisabled>
+                            <option value="">Please select one</option>
+                        </select>
+                        <label asp-for="ServiceRequest.ServiceEngineer"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <select asp-for="ServiceRequest.Status"
+                                asp-items="@(new SelectList(ViewBag.Status))"
+                                class="validate" required="required"
+                                disabled=@statusDisabled>
+                            <option value="">Please select one</option>
+                        </select>
+                        <label asp-for="ServiceRequest.Status"></label>
+                    </div>
+                    <div class="input-field col s12 right-align">
+                        <button class="btn waves-effect waves-light btnSubmit" type="submit"
+                                name="action">
+                            Update
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="row col s12 right-align" asp-validation-summary="All"></div>
+                </div>
+            </form>
+        </div>
+        <div class="row"></div>
+    </div>
+    @await Html.PartialAsync("_ServiceRequestGrid", Model.ServiceRequestAudit, new ViewDataDictionary(ViewData)
+    {
+    { "SectionName", "Recent Updates" },
+    { "Id", "tblAuditServiceRequests" },
+    { "IsAudit", true }
+    })
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable to show list of Service Requests
+            var table = $('.tblServiceRequests').DataTable({
+                'pageLength': 3,
+                // Number of records to be displayed per page
+                'lengthMenu': [[3, 5, 10, -1], [3, 5, 10, 'All']],
+                // Remove default Sorting
+                'sorting': [],
+                'columns': [{ "visible": false }, { "visible": false }, null,
+                { "width": "20%" }, null, null, null, { "visible": false }]
+            });
+            // Set Styles for DataTable and Number of Records to be displayed dropdown
+            $('.tblServiceRequests').css("width", "100%");
+            $('select[name$="ServiceRequests_length"]').formSelect();
+            // Initialize DatePicker
+            $('.datepicker').datepicker(
+                {
+                    format: "dd mmm, yyyy"
+                }
+            );
+            // initialize Material Select
+            $('select').formSelect();
+            $("select[required]").css({
+                display: "block", position: 'absolute',
+                visibility: 'hidden'
+            })
+        });
+    </script>
+}

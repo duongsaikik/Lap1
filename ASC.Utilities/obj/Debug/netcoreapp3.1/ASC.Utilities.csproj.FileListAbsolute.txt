@@ -7,3 +7,12 @@ D:\Web\Lap1\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.csproj.CoreCompi
 D:\Web\Lap1\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.dll
 D:\Web\Lap1\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.pdb
 D:\Web\Lap1\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.csprojAssemblyReference.cache
+D:\Lap1-master\ASC.Utilities\bin\Debug\netcoreapp3.1\ASC.Utilities.deps.json
+D:\Lap1-master\ASC.Utilities\bin\Debug\netcoreapp3.1\ASC.Utilities.dll
+D:\Lap1-master\ASC.Utilities\bin\Debug\netcoreapp3.1\ASC.Utilities.pdb
+D:\Lap1-master\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.csprojAssemblyReference.cache
+D:\Lap1-master\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.AssemblyInfoInputs.cache
+D:\Lap1-master\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.AssemblyInfo.cs
+D:\Lap1-master\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.csproj.CoreCompileInputs.cache
+D:\Lap1-master\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.dll
+D:\Lap1-master\ASC.Utilities\obj\Debug\netcoreapp3.1\ASC.Utilities.pdb
